@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NoyPickerAngularLibComponent} from './noy-picker-angular-lib.component';
+import exp = require("constants");
 
 describe('NoyPickerAngularLibComponent', () => {
   let component: NoyPickerAngularLibComponent
@@ -25,11 +26,17 @@ describe('NoyPickerAngularLibComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('', () => {
+  describe('I need to select a date', () => {
+
+    it('should be a value', function () {
+      expect(fixture.componentInstance.value).toEqual(moment())
+    });
+  })
+
+  describe('I need to select a week',() => {
 
   })
 });
-
 
 /*
 *   je doit pouvoir choisir un mode avec une date
@@ -43,8 +50,6 @@ describe('NoyPickerAngularLibComponent', () => {
 *       je doit pouvoir selectionner une semaine de samedi a samedi
 *       je doit pouvoir rapidement selection la semain courrant
 *       je doit pouvoir selectioner le mois et l'années
-*   je doit pouvoir avoir plusieur style
-*
 *
 * */
 
