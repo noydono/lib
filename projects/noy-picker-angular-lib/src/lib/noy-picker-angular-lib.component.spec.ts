@@ -1,13 +1,16 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NoyPickerAngularLibComponent} from './noy-picker-angular-lib.component';
-import exp = require("constants");
+import * as moment from 'moment';
+import { FormsModule } from '@angular/forms';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('NoyPickerAngularLibComponent', () => {
   let component: NoyPickerAngularLibComponent
   let fixture: ComponentFixture<NoyPickerAngularLibComponent>
 
-  let fakeQuestionText: string
+  let endOfWorld = moment("2012-12-12");
+  let endOfWorldWithTime = moment("2012-12-12 12:12:12");
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,23 +22,69 @@ describe('NoyPickerAngularLibComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NoyPickerAngularLibComponent)
     component = fixture.componentInstance
+
     fixture.detectChanges()
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Value exists', function () {
+    component.writeValue(endOfWorld)
+    fixture.detectChanges()
+
+    expect(component.value).toEqual(endOfWorld)
   });
 
-  describe('I need to select a date', () => {
+  it('Value is empty', function () {
+    component.writeValue("")
+    fixture.detectChanges()
 
-    it('should be a value', function () {
-      expect(fixture.componentInstance.value).toEqual(moment())
-    });
-  })
+    expect(component.month).toEqual(moment().startOf('month'))
+  });
 
-  describe('I need to select a week',() => {
+  it('Value is a string', function () {
+    component.writeValue("2012-12-12")
+    fixture.detectChanges()
 
-  })
+    expect(component.value).toEqual(endOfWorld)
+  });
+
+  it('Month exists', function () {
+    component.writeValue(endOfWorld)
+    fixture.detectChanges()
+
+    expect(component.month).toEqual(endOfWorld.startOf('month'))
+  });
+
+  it('Year exists', function () {
+    component.writeValue(endOfWorld)
+    fixture.detectChanges()
+
+    expect(component.year).toEqual(endOfWorld.startOf('year'))
+  });
+
+  it('Time exists', function () {
+    component.time = true
+    fixture.detectChanges()
+
+    expect(component.time).toBeTruthy()
+  });
+
+  it('should the hours equals to hours value', function () {
+    component.time = true
+    component.writeValue(endOfWorldWithTime)
+    fixture.detectChanges()
+
+    expect(component.hour).toEqual(endOfWorldWithTime.hour())
+    expect(component.minute).toEqual(endOfWorldWithTime.minute())
+  });
+
+  it('should time is true and the value is empty', function () {
+    component.time = true
+    component.writeValue("")
+    fixture.detectChanges()
+
+    expect(component.hour).toEqual(moment().hour())
+    expect(component.minute).toEqual(moment().minute())
+  });
 });
 
 /*

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NoyPickerAngularLibComponent } from './noy-picker-angular-lib.component';
 
 @NgModule({
@@ -6,6 +7,7 @@ import { NoyPickerAngularLibComponent } from './noy-picker-angular-lib.component
     NoyPickerAngularLibComponent
   ],
   imports: [
+    FormsModule
   ],
   exports: [
     NoyPickerAngularLibComponent
